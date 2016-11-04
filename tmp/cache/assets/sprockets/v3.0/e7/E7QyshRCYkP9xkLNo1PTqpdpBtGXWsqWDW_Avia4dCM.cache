@@ -1,0 +1,5 @@
+I"g(function() {
+  $('.nano-content').scrollTop($('.nano-content')[0].scrollHeight);
+
+}).call(this);
+:ET

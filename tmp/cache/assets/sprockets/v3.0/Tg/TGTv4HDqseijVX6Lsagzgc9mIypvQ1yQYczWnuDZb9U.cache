@@ -1,0 +1,9 @@
+I"‘(function() {
+  var element;
+
+  element = document.getElementById('.nano-content');
+
+  element.scrollTop = element.scrollHeight;
+
+}).call(this);
+:ET

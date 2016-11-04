@@ -1,0 +1,5 @@
+I"e(function() {
+  $('.media-block').scrollTop($('.media-block')[0].scrollHeight);
+
+}).call(this);
+:ET

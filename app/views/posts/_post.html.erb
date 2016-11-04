@@ -1,0 +1,125 @@
+  <div class="row">
+      <% if posts[0] != nil %>
+        <div class="col-md-6 margin-btm-20">
+            <div class="quote dark_blue">
+              <%= link_to posts[0], style: "text-decoration: none;" do %>
+                <blockquote>
+                  <p>
+                    <%= posts[0].title %>   
+                  </p>
+                </blockquote>
+              <% end %>                    
+            </div>
+            <div class="quote-footer text-right">
+                <div class="quote-author-img">
+                  <%= link_to profile_path(posts[0].user.profile) do %>
+                    <%= image_tag posts[0].user.profile.profile_pic.url(:thumb), :class => "img-circle"%>
+                  <% end %>
+                </div>
+                <h4><small class="text-muted"><%= time_ago_in_words(posts[0].created_at) +" ago"%> by <%= link_to posts[0].user.profile.first_name, profile_path(posts[0].user.profile.id) %></small>
+                </h4>
+                <p>
+                  <h4>
+                    <% posts[0].categories.each do |category| %>
+                      <%= link_to category.name, category, :class => "btn btn-xs btn-info" %>
+                    <% end %>
+                  </h4>
+                </p>
+            </div>
+        </div><!--colored quote box col-->
+
+      <% end %>
+      <% if posts[1] != nil %>
+        <div class="col-md-6 margin-btm-20">
+            <div class="quote blue">
+              <%= link_to posts[1], style: "text-decoration: none;" do %>
+                <blockquote>
+                  <p>
+                    <%= posts[1].title %>   
+                  </p>
+                </blockquote>
+              <% end %>                        
+            </div>
+            <div class="quote-footer text-right">
+                <div class="quote-author-img">
+                  <%= link_to profile_path(posts[1].user.profile) do %>
+                    <%= image_tag posts[1].user.profile.profile_pic.url(:thumb), :class => "img-circle"%>
+                  <% end %>
+                </div>
+                <h4><small class="text-muted"><%= time_ago_in_words(posts[1].created_at) +" ago"%> by <%= link_to posts[1].user.profile.first_name, profile_path(posts[1].user.profile.id) %></small>
+                </h4>
+                <p>
+                  <h4>
+                    <% posts[1].categories.each do |category| %>
+                      <%= link_to category.name, category, :class => "btn btn-xs btn-info" %>
+                    <% end %>
+                  </h4>
+                </p>
+            </div>
+        </div><!--colored quote box col-->
+        <div class="row divider">    
+          <div class="col-sm-12"><hr></div>
+        </div> 
+      <% end %>
+      <% if posts[2] != nil %>
+        <div class="col-md-6 margin-btm-20">
+            <div class="quote less_gray">
+              <%= link_to posts[2], style: "text-decoration: none;" do %>
+                <blockquote>
+                  <p>
+                    <%= posts[2].title %>   
+                  </p>
+                </blockquote>
+              <% end %>                        
+            </div>
+            <div class="quote-footer text-right">
+                <div class="quote-author-img">
+                  <%= link_to profile_path(posts[2].user.profile) do %>
+                    <%= image_tag posts[2].user.profile.profile_pic.url(:thumb), :class => "img-circle"%>
+                  <% end %>
+                </div>
+                <h4><small class="text-muted"><%= time_ago_in_words(posts[2].created_at) +" ago"%> by <%= link_to posts[2].user.profile.first_name, profile_path(posts[2].user.profile.id) %></small>
+                </h4>
+                <p>
+                  <h4>
+                    <% posts[2].categories.each do |category| %>
+                      <%= link_to category.name, category, :class => "btn btn-xs btn-info" %>
+                    <% end %>
+                  </h4>
+                </p>
+            </div>
+        </div><!--colored quote box col-->     
+      <% end %>
+      <% if posts[3] != nil %>
+        <div class="col-md-6 margin-btm-20">
+            <div class="quote gray">
+              <%= link_to posts[3], style: "text-decoration: none;" do %>
+                <blockquote>
+                  <p>
+                    <%= posts[3].title %>   
+                  </p>
+                </blockquote>
+              <% end %>                        
+            </div>
+            <div class="quote-footer text-right">
+                <div class="quote-author-img">
+                  <%= link_to profile_path(posts[3].user.profile) do %>
+                    <%= image_tag posts[3].user.profile.profile_pic.url(:thumb), :class => "img-circle"%>
+                  <% end %>
+                </div>
+                <h4><small class="text-muted"><%= time_ago_in_words(posts[3].created_at) +" ago"%> by <%= link_to posts[3].user.profile.first_name, profile_path(posts[3].user.profile.id) %></small>
+                </h4>
+                <p>
+                  <h4>
+                    <% posts[3].categories.each do |category| %>
+                      <%= link_to category.name, category, :class => "btn btn-xs btn-info" %>
+                    <% end %>
+                  </h4>
+                </p>
+            </div>
+        </div><!--colored quote box col-->
+        <div class="row divider">    
+          <div class="col-sm-12"><hr></div>
+        </div> 
+      <% end %>
+  </div><!--testimonials row-->

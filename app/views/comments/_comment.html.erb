@@ -1,0 +1,21 @@
+<li class="media">
+  <div class="comment">
+    <a href="#" class="pull-left">
+    <%= image_tag comment.user.profile.profile_pic.url(:thumb), :class => "img-circle"%>
+    </a>
+    <div class="media-body">
+      <strong class="text-success"><%= link_to comment.user.profile.first_name + " " + comment.user.profile.last_name, profile_path(comment.user.profile) %></strong>
+      <span class="text-muted">
+      <small class="text-muted"><%= time_ago_in_words(comment.created_at) + " ago"%></small>
+      </span>
+      <span class="text-muted pull-right">
+      <% if user_signed_in? && comment.user_id == current_user.id %>
+        <small class="btn btn-info btn-xs"><i class="fa fa-times"></i><%= link_to "Edit", edit_post_comment_path(@post, comment) %></small>
+        <small class="btn btn-danger btn-xs"><i class="fa fa-times"></i><%= link_to "Remove", post_comment_path(@post, comment), :method => :delete, data: {confirm: "Are you sure?"} %></small>
+      <% end %>
+      </span>
+      <p><%= comment.comment %></p>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</li>

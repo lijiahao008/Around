@@ -1,0 +1,7 @@
+I"d(function() {
+  jQuery(function() {
+    return $('.chosen-it').chosen();
+  });
+
+}).call(this);
+:ET

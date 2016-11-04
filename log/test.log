@@ -1,0 +1,443 @@
+  [1m[35m (5.6ms)[0m  [1m[35mDROP DATABASE IF EXISTS `Around_test`[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE DATABASE `Around_test` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35m (17.7ms)[0m  [1m[35mCREATE TABLE `categories` (`id` int AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (14.7ms)[0m  [1m[35mCREATE TABLE `categories_posts` (`category_id` int, `post_id` int,  INDEX `index_categories_posts_on_category_id` USING btree (`category_id`),  INDEX `index_categories_posts_on_post_id` USING btree (`post_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (12.9ms)[0m  [1m[35mCREATE TABLE `comments` (`id` int AUTO_INCREMENT PRIMARY KEY, `comment` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `user_id` int, `post_id` int,  INDEX `index_comments_on_post_id` USING btree (`post_id`),  INDEX `index_comments_on_user_id` USING btree (`user_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (20.4ms)[0m  [1m[35mCREATE TABLE `posts` (`id` int AUTO_INCREMENT PRIMARY KEY, `title` varchar(255), `body` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `user_id` int, `latitude` float(24), `longitude` float(24),  INDEX `index_posts_on_user_id` USING btree (`user_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (16.1ms)[0m  [1m[35mCREATE TABLE `profiles` (`id` int AUTO_INCREMENT PRIMARY KEY, `first_name` varchar(255), `last_name` varchar(255), `description` text, `gender` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `user_id` int, `profile_pic_file_name` varchar(255), `profile_pic_content_type` varchar(255), `profile_pic_file_size` int, `profile_pic_updated_at` datetime) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (15.8ms)[0m  [1m[35mCREATE TABLE `users` (`id` int AUTO_INCREMENT PRIMARY KEY, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime, `remember_created_at` datetime, `sign_in_count` int DEFAULT 0 NOT NULL, `current_sign_in_at` datetime, `last_sign_in_at` datetime, `current_sign_in_ip` varchar(255), `last_sign_in_ip` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `provider` varchar(255), `uid` varchar(255), UNIQUE INDEX `index_users_on_email` USING btree (`email`), UNIQUE INDEX `index_users_on_reset_password_token` USING btree (`reset_password_token`)) ENGINE=InnoDB DEFAULT CHARSET=latin1[0m
+  [1m[35m (13.5ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) PRIMARY KEY) ENGINE=InnoDB[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT version FROM `schema_migrations`[0m
+  [1m[35m (1.0ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES ('20160927234246')[0m
+  [1m[35m (1.0ms)[0m  [1m[32mINSERT INTO schema_migrations (version) VALUES ('20160919023220'), ('20160919024047'), ('20160919024209'), ('20160919024321'), ('20160919025919'), ('20160919030310'), ('20160919030637'), ('20160919182858'), ('20160919185042'), ('20160927021016'), ('20160927233413');
+
+[0m
+  [1m[35m (12.4ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) PRIMARY KEY, `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'test', '2016-10-26 21:42:30', '2016-10-26 21:42:30')[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `categories`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM `comments`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `posts`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `profiles`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `users`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (1.1ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `categories`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM `comments`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `posts`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `profiles`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `users`[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `categories`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `comments`[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `posts`[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM `profiles`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `users`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `categories`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `comments`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `posts`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `profiles`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `users`[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `categories`[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `comments`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `posts`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (1.3ms)[0m  [1m[31mDELETE FROM `profiles`[0m
+  [1m[36mFixture Insert (1.0ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `users`[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `categories`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `comments`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `posts`[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `profiles`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `users`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `categories`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `comments`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.5ms)[0m  [1m[31mDELETE FROM `posts`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `profiles`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `users`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `categories`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `comments`[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `posts`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `profiles`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `users`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:30', '2016-10-26 21:42:30', 980190962)[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:30', '2016-10-26 21:42:30', 298486374)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `categories`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `comments`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.7ms)[0m  [1m[31mDELETE FROM `posts`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `profiles`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `users`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM `categories`[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `comments`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM `posts`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.7ms)[0m  [1m[31mDELETE FROM `profiles`[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `users`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (2.4ms)[0m  [1m[31mDELETE FROM `categories`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM `comments`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `posts`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `profiles`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.5ms)[0m  [1m[31mDELETE FROM `users`[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `categories`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `comments`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `posts`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `profiles`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM `users`[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.9ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `categories`[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `comments`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `posts`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `profiles`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `users`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `categories`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `comments`[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `posts`[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `profiles`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `users`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `categories`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `comments`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `posts`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `profiles`[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `users`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `categories`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `comments`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `posts`[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `profiles`[0m
+  [1m[36mFixture Insert (1.0ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (1.2ms)[0m  [1m[31mDELETE FROM `users`[0m
+  [1m[36mFixture Insert (1.3ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (1.1ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `categories`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `comments`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM `posts`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM `profiles`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `users`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.5ms)[0m  [1m[31mDELETE FROM `categories`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `comments`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `posts`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `profiles`[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `users`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `categories`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `comments`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `posts`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `profiles`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `users`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `categories`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `comments`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `posts`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.5ms)[0m  [1m[31mDELETE FROM `profiles`[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM `users`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM `categories`[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `categories` (`name`, `created_at`, `updated_at`, `id`) VALUES ('MyString', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM `comments`[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO `comments` (`comment`, `created_at`, `updated_at`, `id`) VALUES ('MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `posts`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `posts` (`title`, `body`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyText', '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM `profiles`[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO `profiles` (`first_name`, `last_name`, `description`, `gender`, `created_at`, `updated_at`, `id`) VALUES ('MyString', 'MyString', 'MyText', 1, '2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM `users`[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:31', '2016-10-26 21:42:31', 980190962)[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO `users` (`created_at`, `updated_at`, `id`) VALUES ('2016-10-26 21:42:31', '2016-10-26 21:42:31', 298486374)[0m
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSET FOREIGN_KEY_CHECKS = 1[0m

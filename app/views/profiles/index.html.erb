@@ -1,0 +1,26 @@
+
+<div class="container">
+  <div class="page-header">
+    <h1 class="text-center">Nearby Users</h1>
+  </div>
+  <div class="container">
+    <% @profiles.each_slice(3) do |three_profiles| %>
+    <div class="row stylish-panel">
+      <% three_profiles.each do |profile| %>
+        <div class="col-md-4">
+          <div>
+            <%= image_tag profile.profile_pic.url(:thumb), :class => "img-thumbnail"%>
+            <h2><%= profile.first_name + " " + profile.last_name %></h2>
+            <p><%= profile.description %>
+            </p>
+            <%= link_to "Visit Profile >>", profile_path(profile), class: "btn btn-primary" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+</div>
+<!-- /container -->
+
+

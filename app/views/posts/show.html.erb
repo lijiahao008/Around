@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="box">
+            <div class="box-icon">
+                <span class="fa fa-4x fa-html5"><%= image_tag @post.user.profile.profile_pic.url(:thumb), :class => "img-circle"%></span>
+            </div>
+            <div class="info">
+                <h4 class="text-center"><%= @post.title %></h4>
+                <p><%= @post.body %></p>
+                <% unless user_signed_in? && @post.user_id == current_user.id %>
+                  <%= link_to "Visit " + @post.user.profile.first_name + "'s profile", profile_path(@post.user.profile), class: "btn btn-info" %>
+                <% else %>
+                  <%= link_to "Edit Post", edit_post_path(@post), class: "btn btn-info" %> 
+                  <%= link_to "Delete Post", post_path(@post), :method => :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
+                <% end %>
+            </div>
+        </div>
+      </div>
+	</div>
+
+  </br>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          Comments (<%= @post.comments.size %>)
+        </div>
+        <div class="panel-body comments">
+          <%= form_for [@post, @comment], remote: true do |f| %>
+          	<%= f.text_area :comment, class: "form-control new_comment", placeholder: "Write your comment", rows: "5"  %>
+          	<br>
+          	<%= f.submit 'Submit comment', :class => "btn btn-info pull-right" %>
+          <% end %>
+          <div class="clearfix"></div>
+          <hr>
+          <ul class="media-list" id="post_comments">
+            <% @comments.each do |comment| %>
+            	<%= render 'comments/comment', comment: comment %>
+            <% end %>
+            <%= will_paginate @comments, renderer: BootstrapPagination::Rails %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,11 @@
+<div class="container">
+    <ul>
+        <% @posts.each_slice(4) do |posts| %>
+          <%= render 'post', posts: posts %>
+        <% end %>  
+      	<%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
+    </ul>
+</div>
+  
+
+

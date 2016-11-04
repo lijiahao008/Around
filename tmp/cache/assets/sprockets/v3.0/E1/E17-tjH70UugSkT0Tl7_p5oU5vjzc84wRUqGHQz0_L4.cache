@@ -1,0 +1,5 @@
+I"](function() {
+  $('.pad-all').scrollTop($('.pad-all')[0].scrollHeight);
+
+}).call(this);
+:ET

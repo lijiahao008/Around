@@ -1,0 +1,30 @@
+<li>
+  <div class="row">
+  <div class="col-sm-9">
+    <span class="mail">
+  <%= link_to conversation_path(conversation) do %>
+    <span class="mail-subject"><%= conversation.subject %>
+    </span>
+    <span class="mail-message-preview"><%= conversation.last_message.body %><br><small><span class="text-muted"><%= time_ago_in_words(conversation.last_message.created_at) %> ago</span></small>
+    </span>
+  <% end %>
+</span>
+  </div>
+  <div class="col-sm-3">
+    <div class="btn-group-vertical pull-right">
+    <% if conversation.is_trashed?(current_user) %>
+        <%= link_to 'Restore', restore_conversation_path(conversation), class: 'btn btn-xs btn-info pull-right', method: :post %><br>
+      <% else %>
+        <p><%= link_to 'Move to trash', conversation_path(conversation), class: 'btn btn-xs btn-danger pull-right', method: :delete, data: {confirm: 'Are you sure?'} %></p><br>
+        <% if conversation.is_unread?(current_user) %>
+          <%= link_to 'Mark as read', mark_as_read_conversation_path(conversation),
+                      class: 'btn btn-xs btn-info pull-right', method: :post %>
+        <% else %>
+          <%= link_to 'Mark as unread', mark_as_unread_conversation_path(conversation),
+                      class: 'btn btn-xs btn-info pull-right', method: :post %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  </div>
+</li>

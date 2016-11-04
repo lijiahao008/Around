@@ -1,0 +1,7 @@
+I"›(function() {
+  $(document).on('turbolinks:load', function() {
+    $('.nano-content').scrollTop($('.nano-content')[0].scrollHeight);
+  });
+
+}).call(this);
+:ET

@@ -1,0 +1,6 @@
+
+<%= form_for [@post, @comment] do |f| %>
+	<%= f.text_area :comment, class: "form-control new_comment", placeholder: "Write your comment", rows: "5"  %>
+	<br>
+	<%= f.submit 'Submit comment', :class => "btn btn-info pull-right" %>
+<% end %>

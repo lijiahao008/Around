@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Around</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+
+  <body>
+  	
+	<nav class="navbar navbar-default" role="navigation">
+	  <div class="container">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-brand-centered">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <div class="navbar-brand navbar-brand-centered"><%= link_to "Around", root_path %></div>
+	    </div>
+
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="navbar-brand-centered">
+	      <ul class="nav navbar-nav">
+	        <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <% Category.all.order("name ASC").each do |category| %>
+                	<li><a><%= link_to category.name, category_path(category) %></a></li>
+                <% end %>
+              </ul>
+            </li>
+            <li>
+            	<%= link_to "People Around You", profiles_path %>
+            </li>
+	      </ul>
+	      <ul class="nav navbar-nav navbar-right">
+	        <% if user_signed_in? %>
+	        <li>
+	        	<%= link_to conversations_path do %>
+		        	<% if current_user.mailbox.receipts.where(is_read:false).count > 0 %>
+		        		<%= "Messages(" + current_user.mailbox.receipts.where(is_read:false).count.to_s + ")" %>
+		        	<% else %>
+		        		<%= "Messages" %>
+		        	<% end %>
+	        	<% end %>
+	        </li>
+	        <li><%= link_to "New Post", new_post_path %>
+	        </li>
+	        <li class="dropdown">
+              	<a href="#" class="dropdown-toggle" data-toggle="dropdown">My account<span class="caret"></span></a>
+              	<ul class="dropdown-menu">
+	                <li>
+	                    <div class="navbar-login">
+	                        <div class="row">
+	                            <div class="col-lg-4">
+	                                <p class="text-center">
+	                                	<% if current_user.profile != nil %>
+	                                    	<%= image_tag current_user.profile.profile_pic.url(:thumb), class: "icon-size" %>
+
+	                                    <% else %>
+	                                    	<span class="glyphicon glyphicon-user icon-size"></span>
+	                                    <% end %>
+	                                </p>
+	                            </div>
+	                            <div class="col-lg-8">
+	                                <% if current_user.profile != nil %>
+	                                	<p class="text-left"><strong><%= current_user.profile.first_name %></strong></p>
+	                                	<p class="text-left small"><%= current_user.email %></p>
+	                                	<p class="text-left">
+	                                    <%= link_to "My Profile", profile_path(current_user.profile), class: "btn btn-primary btn-block btn-sm" %>
+	                                	</p>
+	                                <% else %>
+	                               		<p class="text-left"><strong>Your name</strong></p>
+	                                	<p class="text-left small"><%= current_user.email %></p>
+	                                	
+	                                <% end %>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </li>
+	                <li class="divider"></li>
+	                <li>
+	                    <div class="navbar-login navbar-login-session">
+	                        <div class="row">
+	                            <div class="col-lg-12">
+	                                <p>
+	                                    <a><%= link_to 'Sign out', destroy_user_session_path,  :method => :delete, :class => "btn btn-danger btn-block" %></a>
+	                                </p>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </li>
+               	</ul>
+            </li>
+            <% else %>
+            	<li><%= link_to "Sign up", new_user_registration_path %></li>
+	            <li><p class="navbar-text">Already have an account?</p></li>
+
+	            <li class="dropdown">
+	              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+		          <ul id="login-dp" class="dropdown-menu">
+		            <li>
+		               <div class="row">
+		                  <div class="col-md-12">
+		                    Login via
+		                    <div class="social-buttons">
+		                      <%= link_to 'Facebook', user_facebook_omniauth_authorize_path, :class => "btn btn-fb" %>
+		                      <%= link_to 'Google', user_google_oauth2_omniauth_authorize_path, :class => "btn btn-gplus" %>
+		                      
+		                    </div>
+		                                    or
+		                     <%= form_for(:user, :url => session_path(:user)) do |f| %>
+		                     
+		                        <div class="form-group">
+		                           
+		                           <%= f.text_field :email, class: 'form-control', placeholder: "Email" %>
+		                        </div>
+		                        <div class="form-group">
+		                        	<%= f.password_field :password, class: 'form-control', placeholder: "Password" %>
+		                        	<div class="help-block text-right"><%= link_to "Forgot your password?", new_password_path(:user) %></div>
+		                        </div>
+		                        <div class="form-group">
+		                           <%= f.submit 'Sign in', class: "btn btn-primary btn-block" %>
+		                        </div>
+		                        <div class="checkbox">
+		                           <label>
+		                           <%= f.check_box :remember_me %> keep me logged-in
+		                           </label>
+		                        </div>
+		                     
+		                     <% end %>
+		                  </div>
+		                  <div class="bottom text-center">
+		                    New here ? <a><b><%= link_to 'Join Us', new_user_registration_path %></b></a>
+		                  </div>
+		               </div>
+		            </li>
+		          </ul>
+	            </li>
+            <% end %>		        
+	      </ul>
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+  	<div class="container">
+	  <% if notice %>
+	  	<div class="alert alert-info fade in out">
+	  		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<p id="notice"><%= notice %></p>
+		</div>
+	  <% end %>
+	</div>
+    <%= yield %>
+	</div>
+ 
+</html>

@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+      <%= link_to new_message_path, class: 'btn btn-info navbar-btn' do %>
+        <span class="glyphicon glyphicon-pencil"></span> Compose
+      <% end %>
+      <ul class="nav nav-pills nav-stacked">
+        <%= mailbox_section 'inbox', @box %>
+        <%= mailbox_section 'sent', @box %>
+        <%= mailbox_section 'trash', @box %>
+      </ul>
+    </div>
+
+    <div class="col-sm-9">
+      <div class="tab-content">
+        <% if @box == 'inbox' %>
+          <div class="tab-pane active" id="inbox">
+            <div class="container">
+              <div class="content-container clearfix">
+               <div class="col-md-9">
+                   <h1 class="content-title">Inbox</h1>
+                   
+                   <input type="search" placeholder="Search Mail" class="form-control mail-search" />
+                   
+                   <ul class="mail-list">
+                       <%= render partial: 'conversations/conversation', collection: @conversations %>
+                       <%= will_paginate %>
+                   </ul>
+               </div>
+              </div>
+            </div>
+          </div>
+        
+        <% elsif @box == 'sent' %>
+          <div class="tab-pane active" id="sent-mail">
+            <div class="container">
+               <div class="content-container clearfix">
+                   <div class="col-md-9">
+                       <h1 class="content-title">Sent Mail</h1>
+                       
+                       <input type="search" placeholder="Search Mail" class="form-control mail-search" />
+                       
+                       <ul class="mail-list">
+                        <%= render partial: 'conversations/conversation', collection: @conversations %>
+                        <%= will_paginate %>
+                       </ul>
+                   </div>
+               </div>
+             </div>
+          </div>
+        
+        <% elsif @box == 'trash' %>
+          <div class="tab-pane active" id="trash">
+            <div class="container">
+                 <div class="content-container clearfix">
+                     <div class="col-md-9">
+                         <h1 class="content-title">Trash</h1>
+                         <p><%= link_to 'Empty trash', empty_trash_conversations_path, class: 'btn btn-danger pull-right', method: :delete, data: {confirm: 'Are you sure?'} %></p>
+                          </br>
+                         <input type="search" placeholder="Search Mail" class="form-control mail-search" />
+                         
+                         <ul class="mail-list">
+                          <%= render partial: 'conversations/conversation', collection: @conversations %>
+                          <%= will_paginate %>
+                         </ul>
+                     </div>
+                 </div>
+             </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

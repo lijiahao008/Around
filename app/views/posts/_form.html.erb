@@ -1,0 +1,26 @@
+<%= simple_form_for post do |f| %>
+  
+<div class="container">
+  <div class="well"> 
+    <form class="form-horizontal" role="form">
+      <h4>What's New</h4>
+      <div class="form-group" style="padding:10px;">
+        <%= f.input :title, :placeholder => "Title" %>
+        </br>
+        <%= f.input :body, :input_html => {:rows => 10, :placeholder => "Body"} %>
+        </br>
+        <%= f.association :categories,
+                  collection: Category.all,
+                  include_blank: true,
+                  input_html: { class: 'chosen-select form-control' } %>
+      </div>
+      <div>
+        <%= f.button :submit, :class=>"btn btn-primary pull-right" %>
+        <%= link_to "Cancel", posts_path, class: "btn btn-default pull-right" %>
+      </div>
+      <ul class="list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
+    </form>
+  </div>
+</div>
+
+<% end %>
