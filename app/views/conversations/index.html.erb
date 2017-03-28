@@ -19,9 +19,9 @@
               <div class="content-container clearfix">
                <div class="col-md-9">
                    <h1 class="content-title">Inbox</h1>
-                   
+
                    <input type="search" placeholder="Search Mail" class="form-control mail-search" />
-                   
+
                    <ul class="mail-list">
                        <%= render partial: 'conversations/conversation', collection: @conversations %>
                        <%= will_paginate %>
@@ -30,16 +30,16 @@
               </div>
             </div>
           </div>
-        
+
         <% elsif @box == 'sent' %>
           <div class="tab-pane active" id="sent-mail">
             <div class="container">
                <div class="content-container clearfix">
                    <div class="col-md-9">
                        <h1 class="content-title">Sent Mail</h1>
-                       
+
                        <input type="search" placeholder="Search Mail" class="form-control mail-search" />
-                       
+
                        <ul class="mail-list">
                         <%= render partial: 'conversations/conversation', collection: @conversations %>
                         <%= will_paginate %>
@@ -48,7 +48,7 @@
                </div>
              </div>
           </div>
-        
+
         <% elsif @box == 'trash' %>
           <div class="tab-pane active" id="trash">
             <div class="container">
@@ -58,7 +58,7 @@
                          <p><%= link_to 'Empty trash', empty_trash_conversations_path, class: 'btn btn-danger pull-right', method: :delete, data: {confirm: 'Are you sure?'} %></p>
                           </br>
                          <input type="search" placeholder="Search Mail" class="form-control mail-search" />
-                         
+
                          <ul class="mail-list">
                           <%= render partial: 'conversations/conversation', collection: @conversations %>
                           <%= will_paginate %>
